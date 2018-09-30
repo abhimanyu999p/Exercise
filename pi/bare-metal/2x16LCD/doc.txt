@@ -1,0 +1,154 @@
+A Brief Note on 16×2 LCD
+
+16×2 Liquid Crystal Display which will display the 32 characters at a time in two rows (16 characters in one row). Each character in the display is of size 5×7 pixel matrix. This matrix differs for different 16×2 LCD modules, if you take JHD162A, this matrix goes to 5×8. There are 16 pins in the LCD module, the pin configuration us given below
+
+PIN NO
+	
+NAME
+	
+FUNCTION
+1
+	
+VSS
+	Ground pin
+2
+	
+VCC
+	Power supply pin of 5V
+3
+	
+VEE
+	Used for adjusting the contrast commonly attached to the potentiometer.
+4
+	
+RS
+	RS is the register select pin used to write display data to the LCD (characters), this pin has to be high when writing the data to the LCD. During the initializing sequence and other commands this pin should low.
+5
+	
+R/W
+	Reading and writing data to the LCD for reading the data R/W pin should be high (R/W=1) to write the data to LCD R/W pin should be low (R/W=0)
+6
+	
+E
+	Enable pin is for starting or enabling the module. A high to low pulse of about 450ns pulse is given to this pin.
+7
+	
+DB0
+	
+8
+	
+DB1
+	
+9
+	
+DB2
+	
+10
+	
+DB3
+	
+11
+	
+DB4
+	DB0-DB7 Data pins for giving data(normal data like numbers characters or command data) which is meant to be displayed
+12
+	
+DB5
+	
+13
+	
+DB6
+	
+14
+	
+DB7
+	
+15
+	
+LED+
+	Back light of the LCD which should be connected to Vcc
+16
+	
+LED-
+	Back light of LCD which should be connected to ground.
+
+So by reading the above table you can get a brief idea how to display a character. For displaying a character you should enable the enable pin (pin 6) by giving a pulse of 450ns, after enabling the pin6 you should select the register select pin (pin4) in write mode. To select the register select pin in write mode you have to make this pin high (RS=1), after selecting the register select you have to configure the R/W to write mode that is R/W should be low (R/W=0).
+
+Follow these simple steps for displaying a character or data
+
+    E=1; enable pin should be high
+    RS=1; Register select should be high
+    R/W=0; Read/Write pin should be low.
+
+To send a command to the LCD just follows these steps:
+
+    E=1; enable pin should be high
+    RS=0; Register select should be low
+    R/W=0; Read/Write pin should be low.
+
+
+
+Commands: There are some preset commands which will do a specific task in the LCD. These commands are very important for displaying data in LCD. The list of commands given below:
+
+Command
+	
+Function
+0F
+	For switching on LCD, blinking the cursor.
+1
+	Clearing the screen
+2
+	Return home.
+4
+	Decrement cursor
+6
+	Increment cursor
+E
+	Display on and also cursor on
+80
+	Force cursor to beginning of the first line
+C0
+	Force cursor to beginning of second line
+38
+	Use two lines and 5x7 matrix
+83
+	Cursor line 1 position 3
+3C
+	Activate second line
+0C3
+	Jump to second line position 3
+0C1
+	Jump to second line position1
+
+
+
+Coming to the programming you should follow these steps:
+
+    STEP1: Initialization of LCD.
+    STEP2: Sending commands to LCD.
+    STEP3: Writing the data to LCD.
+
+[Also Read: How To Make an Adjustable Timer ]
+Initializing LCD
+
+To initialize LCD to the 8051 the following instruction and commands are to be embed in to the functions
+
+    0x38 is used for 8-bit data initialization.
+    0xoC for making LCD display on and cursor off.
+    0X01 for clearing the display of the LCD.
+    0x80 for positioning the cursor at first line .
+
+Sending Commands to the LCD
+
+    E=1; enable pin should be high
+    RS=0; Register select should be low for sending commands
+    Placing the data on the data registers
+    R/W=0; Read/Write pin should be low for writing the data.
+
+Writing the Data to the LCD
+
+    E=1; enable pin should be high
+    RS=1; Register select should be high for writing data
+    Placing the data on the data registers
+    R/W=0; Read/Write pin should be low for writing the data.
+
