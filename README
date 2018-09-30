@@ -1,0 +1,23 @@
+This is a collection of my day-to-day learning activities . A very few things are complete so far though.
+
+1. A minimalistic gpio kernel driver, myGpio, for raspberry pi 3
+- Provides open(),close() and ioctl() system calls.
+- Resides in kernel-DD/myGpio/
+ 
+2. An uart based xLoader terminal application for flashig bare-metal raspberry pi
+- Employs a slightly different version of xloader protocol to transmit binary files to raspberry pi for flashing.
+- Resides in utilities/xmodem/
+
+3. A GUI version of xLoader using Qt framework
+- A cute little GUI application.
+- Resides in Qt/xLoader/
+
+4. An uart bootloader for raspberry pi
+- Bare-metal program to receive binary files over uart for flashing.
+- Resides in pi/bare-metal/uart-bootloader/
+
+5. A simple utility program, bin2hex, to display binary files.
+- Displays hexdump on terminal but in a slightly different way than how 'hexdump' does! 
+- Resides in utilities/bin2hex/
+
+More to come ...
